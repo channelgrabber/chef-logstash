@@ -23,10 +23,12 @@ logstash_service name do
 end
 
 logstash_config name do
+  templates({
+    'logstash.conf' => 'server.conf.erb'
+  })
   action [:create]
   notifies :restart, "logstash_service[#{name}]"
 end
-# ^ see `.kitchen.yml` for example attributes to configure templates.
 
 logstash_plugins 'contrib' do
   instance name
