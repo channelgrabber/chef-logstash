@@ -36,7 +36,3 @@ end
 logstash_pattern name do
   action [:create]
 end
-
-logstash_curator 'server' do
-  action [:create]
-end
