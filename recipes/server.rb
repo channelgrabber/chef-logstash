@@ -26,6 +26,13 @@ logstash_config name do
   templates({
     'logstash.conf' => 'server.conf.erb'
   })
+  variables({
+    'patterns_dir' => Logstash.get_attribute_or_default(node, name, 'patterns_dir'),
+    'enable_embedded_es' => Logstash.get_attribute_or_default(node, name, 'enable_embedded_es'),
+    'es_server_ip' => Logstash.get_attribute_or_default(node, name, 'elasticsearch_ip'),
+    'es_cluster' => Logstash.get_attribute_or_default(node, name, 'elasticsearch_cluster'),
+    'graphite_server_ip' => Logstash.get_attribute_or_default(node, name, 'graphite_ip')
+  })
   action [:create]
   notifies :restart, "logstash_service[#{name}]"
 end

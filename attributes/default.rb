@@ -43,6 +43,7 @@ default['logstash']['instance_default']['ipv4_only']  = false
 default['logstash']['instance_default']['debug']      = false
 default['logstash']['instance_default']['workers']    = 1
 
+default['logstash']['instance_default']['patterns_dir']                = 'etc/patterns'
 default['logstash']['instance_default']['pattern_templates_cookbook']  = 'logstash'
 default['logstash']['instance_default']['pattern_templates']           = {}
 default['logstash']['instance_default']['pattern_templates_variables'] = {}
