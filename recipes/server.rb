@@ -46,7 +46,7 @@ elsif node['logstash']['instance'].has_key?(name) && node['logstash']['instance'
   node['logstash']['instance'][name]['plugins'].each do |plugin|
     logstash_plugin plugin do
       instance name
-      action [:install, :update]
+      action [:install]
     end
   end
 end
