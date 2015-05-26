@@ -37,9 +37,11 @@ logstash_config name do
   notifies :restart, "logstash_service[#{name}]"
 end
 
-logstash_plugins 'contrib' do
-  instance name
-  action [:create]
+if Logstash.get_attribute_or_default(node, name, 'version') < "1.5.0"
+  logstash_plugins 'contrib' do
+    instance name
+    action [:create]
+  end
 end
 
 logstash_pattern name do
