@@ -12,7 +12,7 @@ action :install do
     user     @user
     group    @group
     cwd      @instance_dir
-    notifies :restart, "logstash_service[#{ls_instance}]"
+    notifies :restart, "logstash_service[#{@instance}]", :delayed
     not_if   "bin/plugin install --installed '^#{@name}$'", :user => @user, :group => @group, :cwd => @instance_dir
   end
   new_resource.updated_by_last_action(ex.updated_by_last_action?)
@@ -23,7 +23,7 @@ action :install do
     user     @user
     group    @group
     cwd      @instance_dir
-    notifies :restart, "logstash_service[#{ls_instance}]"
+    notifies :restart, "logstash_service[#{@instance}]", :delayed
     only_if   "bin/plugin install --installed '^#{@name}$'", :user => @user, :group => @group, :cwd => @instance_dir
   end
   new_resource.updated_by_last_action(ex.updated_by_last_action?)
@@ -34,7 +34,7 @@ action :remove do
     user     @user
     group    @group
     cwd      @instance_dir
-    notifies :restart, "logstash_service[#{ls_instance}]"
+    notifies :restart, "logstash_service[#{@instance}]", :delayed
     only_if  "bin/plugin install --installed '^#{@name}$'", :user => @user, :group => @group, :cwd => @instance_dir
   end
   new_resource.updated_by_last_action(ex.updated_by_last_action?)
