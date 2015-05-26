@@ -42,6 +42,14 @@ if Logstash.get_attribute_or_default(node, name, 'version') < "1.5.0"
     instance name
     action [:create]
   end
+elsif node['logstash']['instance'].has_key?(name) && node['logstash']['instance'][name]['plugins']
+  node['logstash']['instance'][name]['plugins'].each do |plugin, config|
+    logstash_plugin plugin do
+      instance name
+      version config['version'] if config['version']
+      action (!config.has_key?('install') || config['install'] ? :install : :remove)
+    end
+  end
 end
 
 logstash_pattern name do
