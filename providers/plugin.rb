@@ -20,7 +20,7 @@ action :install do
     group    ls_group
     cwd      ls_instance_dir
     notifies :restart, "logstash_service[#{ls_instance}]", :delayed
-    not_if   "bin/plugin install --installed '^#{ls_name}$'", :user => ls_user, :group => ls_group, :cwd => ls_instance_dir
+    not_if   "bin/plugin list --installed '^#{ls_name}$'", :user => ls_user, :group => ls_group, :cwd => ls_instance_dir
   end
 
   new_resource.updated_by_last_action(ex.updated_by_last_action?)
@@ -39,7 +39,7 @@ action :update do
     group    ls_group
     cwd      ls_instance_dir
     notifies :restart, "logstash_service[#{ls_instance}]", :delayed
-    only_if  "bin/plugin install --installed '^#{ls_name}$'", :user => ls_user, :group => ls_group, :cwd => ls_instance_dir
+    only_if  "bin/plugin list --installed '^#{ls_name}$'", :user => ls_user, :group => ls_group, :cwd => ls_instance_dir
   end
 
   new_resource.updated_by_last_action(ex.updated_by_last_action?)
@@ -58,7 +58,7 @@ action :remove do
     group    ls_group
     cwd      ls_instance_dir
     notifies :restart, "logstash_service[#{ls_instance}]", :delayed
-    only_if  "bin/plugin install --installed '^#{ls_name}$'", :user => ls_user, :group => ls_group, :cwd => ls_instance_dir
+    only_if  "bin/plugin list --installed '^#{ls_name}$'", :user => ls_user, :group => ls_group, :cwd => ls_instance_dir
   end
 
   new_resource.updated_by_last_action(ex.updated_by_last_action?)
