@@ -18,7 +18,7 @@ action :install do
   new_resource.updated_by_last_action(ex.updated_by_last_action?)
 end
 
-action :install do
+action :update do
   ex = execute "bin/plugin update #{@name}" do
     user     @user
     group    @group
