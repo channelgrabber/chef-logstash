@@ -18,6 +18,7 @@ def load_current_resource
   @home = "#{@basedir}/#{@instance}"
   @method = new_resource.method || Logstash.get_attribute_or_default(node, @instance, 'init_method')
   @command = new_resource.command || "#{@home}/bin/logstash"
+  @version = new_resource.version || Logstash.get_attribute_or_default(node, @instance, 'version')
   @user = new_resource.user || Logstash.get_attribute_or_default(node, @instance, 'user')
   @group = new_resource.group || Logstash.get_attribute_or_default(node, @instance, 'group')
   @log_file = Logstash.get_attribute_or_default(node, @instance, 'log_file')
@@ -63,6 +64,7 @@ action :enable do
     ri = runit_service svc[:service_name] do
       options(
         name: svc[:name],
+        version: svc[:version],
         home: svc[:home],
         max_heap: svc[:max_heap],
         min_heap: svc[:min_heap],
@@ -236,6 +238,7 @@ def svc_vars
     home: @home,
     method: @method,
     command: @command,
+    version: @version,
     description: @description,
     chdir: @chdir,
     user: @user,

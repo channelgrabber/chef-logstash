@@ -13,6 +13,7 @@ attribute :instance, kind_of: String, name_attribute: true
 attribute :service_name, kind_of: String
 attribute :method, kind_of: String
 attribute :command, kind_of: String
+attribute :version, kind_of: String
 attribute :args, kind_of: Array
 attribute :description, kind_of: String
 attribute :user, kind_of: String
